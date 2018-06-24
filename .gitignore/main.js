@@ -8,7 +8,7 @@ bot.on('ready', () => {
     console.log("Le bot a démarré !");
 });
 
-bot.login(process.env'NDYwNDU2MzMzMTYyODQwMDc0.DhFBAA.mf257Z0uZAmaQX5TGs7fpsNkJjk');
+bot.login('NDYwNDU2MzMzMTYyODQwMDc0.DhFBAA.mf257Z0uZAmaQX5TGs7fpsNkJjk');
 
 bot.on('message', message => {
     if (message.content === "*ping"){
@@ -33,3 +33,5 @@ bot.on('message', message => {
     }
     
 });})
+
+bot.login('process.env.TOKEN');
