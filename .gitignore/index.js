@@ -1,8 +1,5 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
-const YoutubeDL = require('youtube-dl');
-const ytdl = require('ytdl-core');
-
 var bot = new Discord.Client();
 var prefix = ("-")
 
