@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
+var now = require('performance-now');
 var bot = new Discord.Client();
 var prefix = ("-")
 
@@ -25,7 +26,6 @@ bot.on('guildMemberAdd', member => {
 
 bot.on('message', message => {
     if (message.content.startsWith(prefix + "ping")) {
-    var now = require('performance-now');
     var startTime = now();
     message.channel.send("pong = wait...")
     .then(message => {
@@ -40,27 +40,54 @@ bot.on('message', message => {
             message.author.send("Félicitation, tu a trouvé la commande cachée :thumbsup: ! Va voir l'Administrateur pour recevoir ta récompense !");
             console.log('La commande cachée à été découverte !');
         }
+
         if (message.content === prefix + "all"){
             var help_embed = new Discord.RichEmbed()
+                .setColor("#00FEB7")
+                .setTitle("Menu Principal")
+                .setDescription("__*Bienvenue dans le menu du serveur*__")
+                .addField("Commandes d'infos : 💡", "-m info")
+                .addField("Commandes de modération : ⚖️", "-m modo")
+                .addField("Autres commandes : 💎", "-m other")
+                message.channel.sendEmbed(help_embed);
+            console.log("La commande Principal à été demandée !");
+        }
+
+        if (message.content === prefix + "m info"){
+            var info_embed = new Discord.RichEmbed()
                 .setColor("#0031F7")
-                .setTitle("Mes commandes Principales :")
-                .setThumbnail(message.author.avatarURL)
-                .addField("-all :", "Affiche ce menu .")
+                .setTitle("**Mes commandes d'Informations :**")
+                .addField("-all :", "Affiche le menu antérieur .")
                 .addField("-pannel :", "affiche le panneau indicatif d'Arcadia")
                 .addField("-ping :" ,"Affiche la latence qui me sépare d'Arcadia .")
-                .addField("Commandes de modération :","**Cette partie est dediée à mes commandes de modération**")
+                message.channel.sendEmbed(info_embed);
+                console.log("La commande d'Infos à été demandée !");
+        }
+
+        if (message.content === prefix + "m modo"){
+          var modo_embed = new Discord.RichEmbed()
+                .setColor("#E8FE00")
+                .setTitle("**Mes commandes de modération :**")
                 .addField("-clear :", "Supprime un nombre de message donné dans le channel ou vous vous trouvez.")
                 .addField("-mute / -unmute :", "Permet de mute / demute une personne sélectionnée .")
                 .addField("-warn / -deletewarns :", "Permet de warn / unwarn une personne sélectionnée .")
                 .addField("-seewarns < @ + nom de la personne > :", "Affiche les warns de la personne mentionnée .")
                 .addField("-kick :", "Expulse une personne sélectionnée du serveur .")
-                .addField("-ban :", "Ban une personne sélectionnée")
-                .addField("Autres commandes :", "-card: Affiche ma carte d'identitée .")
+                .addField("-ban :", "Ban une personne sélectionnée du serveur .")
+                message.channel.sendEmbed(modo_embed);
+                console.log("Les commandes de Modération ont été demandées !");
+            }
+
+            if (message.content === prefix + "m other"){
+              var other_embed = new Discord.RichEmbed()
+                .setColor("#FE0069")
+                .setTitle("Autres commandes :")
+                .addField("-card: ", "Affiche ma carte d'identitée .")
                 .addField("-me :", "Vous envoie vos stats en MP")
                 .addField("-share :", "Cette commande vous donne un lien d'invitation pour partager le serveur !")
                 .addField("-about :", "Vous donne des informations additionnelles .")
-            message.channel.sendEmbed(help_embed);
-            console.log("La commande Help à été demandée !");
+            message.channel.sendEmbed(other_embed);
+            console.log("Les autres commandes ont été demandées !");
         }
 
         if (!message.content.startsWith(prefix)) return;
@@ -103,6 +130,7 @@ bot.on('message', message => {
             .setFooter("Nous te remercions pour avoir participé au développement du serveur ! <3 👏 ")
             message.reply("Je t'ai envoyé le lien en MP")
             message.author.send({embed: share_embed});
+            console.log("Un uilisateur a partagé le serveur !")
             break;
         }
 
@@ -190,8 +218,10 @@ bot.on('message', message => {
             var card_embed = new Discord.RichEmbed()
                 .setColor("#0031F7")
                 .setTitle("Ma carte d'identitée :")
-                .addField("Nom :", "Arcabot")
-                .addField("Version :", "ArcaBot est en version 1.8")
+                .addField("Nom :", "**ArcaBot**")
+                .addField("Tag : :hash:", `#${bot.user.discriminator}`)
+                .addField("ID : :id:", `${bot.user.id}`)
+                .addField("Version :", "ArcaBot est en version 2.0")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
         }
@@ -253,9 +283,6 @@ if(message.content.startsWith(prefix + "ban")) {
 
     )
 }
-
-
-
 
 
 var fs = require('fs');
