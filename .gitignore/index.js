@@ -99,7 +99,7 @@ bot.on('message', message => {
 
             .setColor("#01FE29")
             .setTitle("Voici le lien pour inviter des gens sur Arcadia : :thumbsup:")
-            .addField("https://discord.gg/t9xZR8x", "Ce lien n'expire pas :)")
+            .addField("https://discord.gg/Q2ghAg3", "Ce lien n'expire pas :)")
             .setFooter("Nous te remercions pour avoir participé au développement du serveur ! <3 👏 ")
             message.reply("Je t'ai envoyé le lien en MP")
             message.author.send({embed: share_embed});
