@@ -9,7 +9,7 @@ bot.on('ready', () => {
     console.log("Le bot a démarré !");
 });
 
-bot.login('NDYwNDU2MzMzMTYyODQwMDc0.DiOhEw.Vhxgiv4rPaGI7znQ2bhAl44QJSM');
+bot.login(process.env.TOKEN);
 
 bot.on("guildMemberAdd", member => {
   member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
