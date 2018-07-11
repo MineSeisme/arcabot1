@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
-const YoutubeStream = require ('youtube-audio-stream')
 var now = require('performance-now');
 var bot = new Discord.Client();
 var prefix = ("-")
