@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
+const YoutubeStream = require ('youtube-audio-stream')
 var now = require('performance-now');
 var bot = new Discord.Client();
 var prefix = ("-")
@@ -9,7 +10,7 @@ bot.on('ready', () => {
     console.log("Le bot a démarré !");
 });
 
-bot.login(process.env.TOKEN);
+bot.login('process.env.TOKEN');
 
 bot.on("guildMemberAdd", member => {
   member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
@@ -41,12 +42,14 @@ bot.on('message', message => {
             console.log('La commande cachée à été découverte !');
         }
 
+
         if (message.content === prefix + "all"){
             var help_embed = new Discord.RichEmbed()
-                .setColor("#00FEB7")
+                .setColor ("#00FEB7")
                 .setTitle("Menu Principal")
                 .setDescription("__*Bienvenue dans le menu du serveur*__")
                 .addField("Commandes d'infos : 💡", "-m info")
+                .addField("Commandes fun : 🎉", "-m fun")
                 .addField("Commandes de modération : ⚖️", "-m modo")
                 .addField("Autres commandes : 💎", "-m other")
                 message.channel.sendEmbed(help_embed);
@@ -62,6 +65,15 @@ bot.on('message', message => {
                 .addField("-ping :" ,"Affiche la latence qui me sépare d'Arcadia .")
                 message.channel.sendEmbed(info_embed);
                 console.log("La commande d'Infos à été demandée !");
+        }
+
+        if (message.content === prefix + "m fun"){
+          var fun_embed = new Discord.RichEmbed()
+                .setColor("#CDA16F")
+                .setTitle("**Mes commandes pour s'amuser :**")
+                .addField("-8ball :", "Donne une réponse aléatoire à une question donnée .")
+                message.channel.sendEmbed(fun_embed);
+                console.log("Les commandes d'Amusement ont été demandées !");
         }
 
         if (message.content === prefix + "m modo"){
@@ -109,7 +121,30 @@ bot.on('message', message => {
             .setThumbnail(message.author.avatarURL)
             message.reply("Je t'ai envoyé tes stats en MP ! :thumbsup:")
             message.author.send({embed: stats_embed});
-            break;
+            console.log("Un utilisateur a réclamé ses statistiques")
+         } 
+
+        if (!message.content.startsWith(prefix)) return;
+
+        var args = message.content.substring(prefix.length).split(" ");
+
+        switch (args[0].toLowerCase()) {
+            case "about":
+
+            var about_embed = new Discord.RichEmbed()
+
+            .setColor("#FE8F01")
+            .setTitle("Voici les informations à propos du serveur et du reste :")
+            .addField("A propos du bot :", "**Voici des infos sur le bot**")
+            .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation des Tutoriels, de @Albamort et de @Eliot .")
+            .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offire un bot actif 24/7")
+            .addField("A propos d'Aradia :", "**Voici des infos à propos d' Arcadia**")
+            .addField("L'histoire d'Arcadia :", "Arcadia à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) pour (de base), aider lui et ses abonnés à communiquer au travers de channels, mais personne ne venait et il a décidé de continuer à développer son serveur et à en faire de la pub et cela a commencé à créer une communautée ! Un grand merci à vous, qui avez aidé le serveur à rester debout :) <3")
+            .addField("La commande secrete :", "Une commande est cachée dans le serveur ! Si tu la trouve en premier, tu gagne une surprise")
+            .setFooter("A propos - ArcaBot")
+            message.reply("Je t'ai envoyé les infos en MP")
+            message.author.send({embed: about_embed});
+            console.log("Un utilisateur a voulu en savoir plus (about)")
         }
 
         if (!message.content.startsWith(prefix)) return;
@@ -133,35 +168,6 @@ bot.on('message', message => {
             console.log("Un uilisateur a partagé le serveur !")
             break;
         }
-
-        if (!message.content.startsWith(prefix)) return;
-
-        var args = message.content.substring(prefix.length).split(" ");
-
-        switch (args[0].toLowerCase()) {
-            case "about":
-
-            var userCreateDate = message.author.createdAt.toString().split(" ");
-            var msgauthor = message.author.id;
-
-            var about_embed = new Discord.RichEmbed()
-
-            .setColor("#FE8F01")
-            .setTitle("Voici les informations à propos du serveur et du reste :")
-            .addField("A propos du bot :", "**Voici des infos sur le bot**")
-            .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation des Tutoriels, de @Albamort et de @Eliot .")
-            .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offire un bot actif 24/7")
-            .addField("A propos d'Aradia :", "**Voici des infos à propos d' Arcadia**")
-            .addField("L'histoire d'Arcadia :", "Arcadia à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) pour (de base), aider lui et ses abonnés à communiquer au travers de channels, mais personne ne venait et il a décidé de continuer à développer son serveur et à en faire de la pub et cela a commencé à créer une communautée ! Un grand merci à vous, qui avez aidé le serveur à rester debout :) <3")
-            .addField("La commande secrete :", "Une commande est cachée dans le serveur ! Si tu la trouve en premier, tu gagne une surprise")
-            
-            .setFooter("fff")
-            message.reply("Je t'ai envoyé les infos en MP")
-            message.author.send({embed: about_embed});
-            break;
-        }
-
-
 
     if(message.content.startsWith(prefix + "mute")) {
         if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:");
@@ -259,6 +265,7 @@ if(message.content.startsWith(prefix + "kick")) {
 
     kick.kick().then(member => {
         message.channel.send(`${member.user.username} à été kick par ${message.author.username} :thumbsup:`)
+        console.log("Un utilisateur a été kick");
     });
 }
 
@@ -379,7 +386,7 @@ message.mentions.users.first().send(`:warning: **Warn |** depuis **${message.gui
  
  
  
-  if (message.content.startsWith(prefix+"seewarns")||message.content===prefix+"seewarns") {
+if (message.content.startsWith(prefix+"seewarns")||message.content===prefix+"seewarns") {
  
 if (message.channel.type === "dm") return;
  
@@ -551,5 +558,31 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
  
     }
  
-  }})
-
+  }},)
+  
+  bot.on('message', message => {
+      if (message.content.startsWith(prefix + "8ball")) {
+    let args = message.content.split(" ").slice(1);
+    let tte = args.join(" ")
+    if (!tte){
+      return message.reply(":no_entry: Veuillez poser une question ! :no_entry:")};
+  
+      var replys = [
+        "Oui",
+        "Non",
+        "Je ne sais pas",
+        "Peut-être",
+        "Peut-être pas",
+        "Sa dépend",
+        "Surement",
+        "Sans doute",
+        "Probablement",
+        "Probablement pas",
+        "Absolument",
+        "Absolument pas"
+      ];
+  
+      let reponse = (replys[Math.floor(Math.random() * replys.length)])
+      message.channel.send(reponse)
+      console.log("La commande 8ball a été demandée")
+    }})
