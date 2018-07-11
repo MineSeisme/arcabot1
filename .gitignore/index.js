@@ -8,7 +8,7 @@ bot.on('ready', () => {
     console.log("Le bot a démarré !");
 });
 
-bot.login('process.env.TOKEN');
+bot.login(process.env.TOKEN);
 
 bot.on("guildMemberAdd", member => {
   member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
