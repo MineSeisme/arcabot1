@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
-var now = require('performance-now');
+const ping = require('performance-now');
 var bot = new Discord.Client();
 var prefix = ("-")
 
