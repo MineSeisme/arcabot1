@@ -23,17 +23,6 @@ bot.on('guildMemberAdd', member => {
   member.addRole(role)
 })
 
-//bot.on('message', message => {
-    //if (message.content.startsWith(prefix + "ping")) {
-    //var startTime = now();
-    //message.channel.send("pong = wait...")
-    //.then(message => {
-    //var endTime = now();
-    //return message.edit("pong :ping_pong: = " + Math.round(endTime - startTime) + " ms.");
-    //}).catch(console.error);
-    //console.log("Le ping a été demandée")
-//}});
-                
     bot.on('message', message => {
         if (message.content === "-surprise"){
             message.author.send("Félicitation, tu a trouvé la commande cachée :thumbsup: ! Va voir l'Administrateur pour recevoir ta récompense !");
