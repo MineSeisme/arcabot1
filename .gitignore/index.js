@@ -401,7 +401,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
  
           } catch (err) {
  
-            message.channel.send("**"+mentioned.tag+"** n'a aucun warn :eyes: :tumbsup:");
+            message.channel.send("**"+mentioned.tag+"** n'a aucun warn :eyes: :thumbsup:");
  
             return;
  
