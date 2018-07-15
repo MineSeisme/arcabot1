@@ -11,22 +11,16 @@ bot.on('ready', () => {
 
 bot.login(process.env.TOKEN);
 
-bot.on("guildMemberAdd", member => {
-  member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
-})
-
-bot.on("guildMemberRemove", member => {
-  member.guild.channels.find("name", "discussion").send(`${member} est parti d'**Arcadia** 🙁 👎 `)
-})
-
-bot.on('guildMemberAdd', member => {
-  var role = member.guild.roles.find('name', 'Membres Connectés');
-  member.addRole(role)
-})
-
     bot.on('message', message => {
         if (message.content === "-surprise"){
-            message.author.send("Félicitation, tu a trouvé la commande cachée :thumbsup: ! Va voir l'Administrateur pour recevoir ta récompense !");
+          var find_embed = new Discord.RichEmbed()
+                .setColor('RANDOM')
+                .setTitle("Félicitation !")
+                .setDescription("Bravo à toi, tu à découvert ma commande cachée !")
+                .addField("Va voir l'administrateur (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊#5131) pour recevoir ta récompense ! (Mentionne moi et écris : `Je l'ai trouvé`).", "Tu sera emenné dans un channel privé ou tu devra envoyer un screen de ce message pour prouver la découverte de la commande ! :thumbsup:")
+                .setFooter("PS : NE PARTAGE PAS LA COMMANDE SOUS PEINE DE BANNISSEMENT !")
+                message.author.send({embed: find_embed});
+            message.delete();
             console.log('La commande cachée à été découverte !');
         }
 
@@ -60,6 +54,7 @@ bot.on('guildMemberAdd', member => {
                 .setColor("#CDA16F")
                 .setTitle("**Mes commandes pour s'amuser :**")
                 .addField("-8ball :", "Donne une réponse aléatoire à une question donnée .")
+                .addField("-Rcat :", "Affiche une image de chat aléatoire .")
                 message.channel.sendEmbed(fun_embed);
                 console.log("Les commandes d'Amusement ont été demandées !");
         }
@@ -106,6 +101,7 @@ bot.on('guildMemberAdd', member => {
             .setTitle(`Statistiques de l'utilisateur : ${message.author.username}`)
             .addField(`ID de l'utilisateur :id:`, msgauthor, true)
             .addField("Date de création du compte :clock3: :", userCreateDate[1] + ' ' + userCreateDate[2] + ' ' + userCreateDate[3])
+            .addField("Date d'arrivée sur Arcadia :clock3: :", message.member.joinedAt)
             .setThumbnail(message.author.avatarURL)
             message.reply("Je t'ai envoyé tes stats en MP ! :thumbsup:")
             message.author.send({embed: stats_embed});
@@ -125,7 +121,7 @@ bot.on('guildMemberAdd', member => {
             .setTitle("Voici les informations à propos du serveur et du reste :")
             .addField("A propos du bot :", "**Voici des infos sur le bot**")
             .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation des Tutoriels, de @Albamort et de @Eliot .")
-            .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offire un bot actif 24/7")
+            .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offrire un bot actif 24/7")
             .addField("A propos d'Aradia :", "**Voici des infos à propos d' Arcadia**")
             .addField("L'histoire d'Arcadia :", "Arcadia à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) pour (de base), aider lui et ses abonnés à communiquer au travers de channels, mais personne ne venait et il a décidé de continuer à développer son serveur et à en faire de la pub et cela a commencé à créer une communautée ! Un grand merci à vous, qui avez aidé le serveur à rester debout :) <3")
             .addField("La commande secrete :", "Une commande est cachée dans le serveur ! Si tu la trouve en premier, tu gagne une surprise")
@@ -142,7 +138,6 @@ bot.on('guildMemberAdd', member => {
         switch (args[0].toLowerCase()) {
             case "share":
 
-            var userCreateDate = message.author.createdAt.toString().split(" ");
             var msgauthor = message.author.id;
 
             var share_embed = new Discord.RichEmbed()
@@ -172,8 +167,8 @@ bot.on('guildMemberAdd', member => {
 
         if(!message.guild.member(bot.user).hasPermission("MUTE_MEMBERS")) return message.channel.send("Je n'ai pas la permission pour executer la commande ! :thumbsdown:");
         message.channel.overwritePermissions(mute, { SEND_MESSAGES: false}).then(member => {
-            message.channel.send(`${mute.user.username} est désormais mute ! :thumbsup:`);
-            console.log("Un utilisateur a été mute !")
+            message.channel.send(`${mute.user.username} est désormais mute ! 🔇 :thumbsup:`);
+            console.log("Un utilisateur a été mute !  :thumbsup:")
         })
     }
 
@@ -192,7 +187,7 @@ bot.on('guildMemberAdd', member => {
 
         if(!message.guild.member(bot.user).hasPermission("MUTE_MEMBERS")) return message.channel.send("Je n'ai pas la permission pour executer la commande ! :thumbsdown:");
         message.channel.overwritePermissions(mute, { SEND_MESSAGES: true}).then(member => {
-            message.channel.send(`${mute.user.username} est désormais démute ! :thumbsup:`);
+            message.channel.send(`${mute.user.username} est désormais démute ! 🔊 :thumbsup:`);
             console.log("Un utilisateur a été mute !")
         })
     }
@@ -215,6 +210,7 @@ bot.on('guildMemberAdd', member => {
                 .addField("Nom :", "**ArcaBot**")
                 .addField("Tag : :hash:", `#${bot.user.discriminator}`)
                 .addField("ID : :id:", `${bot.user.id}`)
+                .addField("Date de création :", message.guild.createdAt)
                 .addField("Version :", "ArcaBot est en version 2.0")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
@@ -228,13 +224,17 @@ if(message.content.startsWith(prefix + "clear")) {
 
 	if(!args[0]) return message.channel.send(":no_entry: Indique un nombre de messages à supprimer ! :no_entry:")
 	message.channel.bulkDelete(args[0]).then(() => {
-	message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`);
+  message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`);
+  message.delete();
 	console.log("La commande Clear a été demandée !")
 	})
 
 }
 
-if(message.content.startsWith(prefix + "kick")) {
+
+
+
+ if(message.content.startsWith(prefix + "kick")) {
     if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:");
 
     if (message.mentions.users.size === 0) {
@@ -546,34 +546,36 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
  
     }
  
-  }},)
+  }
+  
   
   bot.on('message', message => {
-      if (message.content.startsWith(prefix + "8ball")) {
-    let args = message.content.split(" ").slice(1);
-    let tte = args.join(" ")
-    if (!tte){
-      return message.reply(":no_entry: Veuillez poser une question ! :no_entry:")};
-  
-      var replys = [
-        "Oui",
-        "Non",
-        "Je ne sais pas",
-        "Peut-être",
-        "Peut-être pas",
-        "Sa dépend",
-        "Surement",
-        "Sans doute",
-        "Probablement",
-        "Probablement pas",
-        "Absolument",
-        "Absolument pas"
-      ];
-  
-      let reponse = (replys[Math.floor(Math.random() * replys.length)])
-      message.channel.send(reponse)
-      console.log("La commande 8ball a été demandée")
-    }})
+    if (message.content.startsWith(prefix + "8ball")) {
+  let args = message.content.split(" ").slice(1);
+  let tte = args.join(" ")
+  if (!tte){
+    return message.reply(":no_entry: Veuillez poser une question ! :no_entry:")};
+
+    var replys = [
+      "Oui",
+      "Non",
+      "Je ne sais pas",
+      "Peut-être",
+      "Peut-être pas",
+      "Sa dépend",
+      "Surement",
+      "Sans doute",
+      "Probablement",
+      "Probablement pas",
+      "Absolument",
+      "Absolument pas"
+    ];
+
+    let reponse = (replys[Math.floor(Math.random() * replys.length)])
+    message.channel.send(reponse)
+    console.log("La commande 8ball a été demandée")
+  }})})
+
 
     bot.on('message', message => {
       if (message.content.startsWith(prefix + "sondage")) {
