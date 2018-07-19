@@ -1,7 +1,11 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
-const {get} = require('snekfetch')
+const {get} = require('snekfetch');
+const ytdl = require('ytdl-core');
+const queue = new Map();
 var bot = new Discord.Client();
+var dispatcher;
+var servers = {};
 var prefix = ("-")
 
 bot.on('ready', () => {
@@ -11,7 +15,27 @@ bot.on('ready', () => {
 
 bot.login(process.env.TOKEN);
 
-    bot.on('message', message => {
+bot.on("guildMemberAdd", member => {
+  member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
+})
+
+bot.on("guildMemberAdd", member => {
+  member.createDM().then(channel => {
+    return channel.send("```Salut et merci d'avoir rejoint **Arcadia** ! 👍  N'hésite pas a faire un tour dans le règlement pour savoir ce qu'il faut faire/pas faire ! 😉 Je te recommande également de visiter le channel Premiers_Pas pour savoir quoi faire !👌👣```");
+  }).catch(console.error)
+});
+
+bot.on("guildMemberRemove", member => {
+  member.guild.channels.find("name", "discussion").send(`${member} est parti d'**Arcadia** 🙁 👎 `)
+})
+
+bot.on('guildMemberAdd', member => {
+  var role = member.guild.roles.find('name', 'Membres Connectés');
+  member.addRole(role)
+})
+                
+bot.on('message', message => {
+  if (message.channel.type === "dm") return;
         if (message.content === "-surprise"){
           var find_embed = new Discord.RichEmbed()
                 .setColor('RANDOM')
@@ -86,7 +110,7 @@ bot.login(process.env.TOKEN);
         }
 
         if (!message.content.startsWith(prefix)) return;
-
+          if (message.channel.type === "dm") return;
         var args = message.content.substring(prefix.length).split(" ");
 
         switch (args[0].toLowerCase()) {
@@ -109,7 +133,7 @@ bot.login(process.env.TOKEN);
          } 
 
         if (!message.content.startsWith(prefix)) return;
-
+          if (message.channel.type === "dm") return;
         var args = message.content.substring(prefix.length).split(" ");
 
         switch (args[0].toLowerCase()) {
@@ -132,7 +156,7 @@ bot.login(process.env.TOKEN);
         }
 
         if (!message.content.startsWith(prefix)) return;
-
+          if (message.channel.type === "dm") return;
         var args = message.content.substring(prefix.length).split(" ");
 
         switch (args[0].toLowerCase()) {
@@ -153,6 +177,7 @@ bot.login(process.env.TOKEN);
         }
 
     if(message.content.startsWith(prefix + "mute")) {
+        if (message.channel.type === "dm") return;
         if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:");
 
         if(message.mentions.users.size === 0) {
@@ -173,6 +198,7 @@ bot.login(process.env.TOKEN);
     }
 
     if(message.content.startsWith(prefix + "unmute")) {
+      if (message.channel.type === "dm") return;
         if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:");
 
         if(message.mentions.users.size === 0) {
@@ -210,14 +236,15 @@ bot.login(process.env.TOKEN);
                 .addField("Nom :", "**ArcaBot**")
                 .addField("Tag : :hash:", `#${bot.user.discriminator}`)
                 .addField("ID : :id:", `${bot.user.id}`)
-                .addField("Date de création :", message.guild.createdAt)
-                .addField("Version :", "ArcaBot est en version 2.0")
+                .addField("Date de création : :clock3:", message.guild.createdAt)
+                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.1")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
         }
 
 
 if(message.content.startsWith(prefix + "clear")) {
+  if (message.channel.type === "dm") return;
     if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
 
 	let args = message.content.split(" ").slice(1);
@@ -235,6 +262,7 @@ if(message.content.startsWith(prefix + "clear")) {
 
 
  if(message.content.startsWith(prefix + "kick")) {
+  if (message.channel.type === "dm") return;
     if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:");
 
     if (message.mentions.users.size === 0) {
@@ -258,6 +286,7 @@ if(message.content.startsWith(prefix + "clear")) {
 }
 
 if(message.content.startsWith(prefix + "ban")) {
+  if (message.channel.type === "dm") return;
     if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:")
 
     if(message.mentions.users.size === 0) {
@@ -283,7 +312,8 @@ if(message.content.startsWith(prefix + "ban")) {
 var fs = require('fs');
  
 let warns = JSON.parse(fs.readFileSync("./warns.json", "utf8"));
- 
+
+
 if (message.content.startsWith(prefix + "warn")){
  
 if (message.channel.type === "dm") return;
@@ -548,8 +578,8 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
  
   }
   
-  
-  bot.on('message', message => {
+
+ bot.on('message', message => {
     if (message.content.startsWith(prefix + "8ball")) {
   let args = message.content.split(" ").slice(1);
   let tte = args.join(" ")
@@ -584,7 +614,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
             let thingToEcho = args.join(" ");
             var embed = new Discord.RichEmbed()
                 .setDescription("Sondage")
-                .addField(thingToEcho, "Répond avec :white_check_mark: ou :x:")
+                .addField(thingToEcho, "Répondez avec :white_check_mark: ou :x:")
                 .setColor('RANDOM');
                 message.guild.channels.find("name", "sondages").sendEmbed(embed)
                 .then(function (message) {
@@ -610,3 +640,18 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
         }
       }
     })
+    
+    function play(connection, message) {
+      var server = servers[message.guild.id];
+    
+      server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}))
+    
+      server.queue.shift();
+    
+      server.dispatcher.on("end", function() {
+        if (server.queue[0]) play(connexion, message);
+    
+        else connection.disconnect();
+    
+      });
+    }
