@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const CLEAR_MESSAGES = '@clearMessages';
 const {get} = require('snekfetch');
-const ytdl = require('ytdl-core');
+const ytdl = require ('ytdl-core');
 const queue = new Map();
 var bot = new Discord.Client();
 var dispatcher;
