@@ -179,6 +179,7 @@ bot.on('message', message => {
         
             let reponse = (replys[Math.floor(Math.random() * replys.length)])
             message.channel.send(reponse)
+		message.delete();
             console.log("Une blague a été demandée")
           }
 
