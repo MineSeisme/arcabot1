@@ -78,6 +78,7 @@ bot.on('message', message => {
                 .setTitle("**Mes commandes pour s'amuser :**")
                 .addField("-8ball :", "Donne une réponse aléatoire à une question donnée .")
                 .addField("-Rcat :", "Affiche une image de chat aléatoire .")
+                .addField("-joke", "Affiche une blague aléatoire .")
                 message.channel.sendEmbed(fun_embed);
                 console.log("Les commandes d'Amusement ont été demandées !");
         }
@@ -108,6 +109,79 @@ bot.on('message', message => {
             console.log("Les autres commandes ont été demandées !");
         }
 
+        if (message.content.startsWith(prefix + "joke")) {
+          let args = message.content.split(" ").slice(1);
+        
+            var replys = [
+              "Un jour Dieu dit à Casto de ramer. Et depuis, **Casto rama** .",
+              "Qu'est-ce qu'une manifestation d'aveugles? | Un festival de Cannes .",
+              "C'est l'histoire d'un gars qui rentre dans un bar, puis dans une table, puis dans une chaise...",
+              "Quelle est la mamie qui fait peur au voleurs ? | Mamie Traiette .",
+              "Comment fait-on pour allumer un barbecue breton ? | On utilise des breizh .",
+              "Où est-ce que les super héros vont-ils faire leurs courses ? | Au supermarché .",
+              "Comment est ce que les abeilles communiquent entre elles ? | Par e-miel .",
+              "Que dit-on d'une fleur qui a eu zéro à son contrôle ? | Qu'elle s'est planté .",
+              "Que fait un employé de chez Sephora à sa pause clope ? | Il parfumer .",
+              "Que fait une lampe quand elle se fait agresser ? | Elle crie **A LED !!!** .",
+              "Qu'est ce qu'une carotte dans une flaque d'eau ? | Un bonhomme de neige en été .",
+              "Quelle est la fée que les enfants détestent ? | La fée C .",
+              "Quel est le super héros qui a tout le temps peur ? | Le super-sticieux .",
+              "Comment les musiciens choisissent-ils leur parquet ? | Ils choisissent un parquet Fa Si La Si Ré .",
+              "Quel est le réseau préféré des pêcheurs ? | Truiteur .",
+              "Comment reconnaît-on un cannibale ? | Il mange des petits Suisses .",
+              "Que fait une vache quand elle ferme les yeux ? | Du lait concentré .",
+              "Quel est le super héros qui donne le plus vite l'heure ? | Speed heure man .",
+              "Pourquoi est-ce que les anges sont sourds ? | Parce que Jésus Christ .",
+              "Quel est le fruit préféré des profs d'histoire ? | Les dates .",
+              "Quelle est la déesse du wifi ? | La déesse L .",
+              "Quelle est l'arme préféré des vegans ? | Le lance roquette .",
+              "Qu'est-ce qu'un hamster dans l'espace ? | Un hamsteroïde .",
+              "Pourquoi est-ce que Winnie l'Ourson veut absolument se marier ? | Pour partir en lune de miel .",
+              "Que dit une mère à son fils geek quand le dîner est servi ? | Alt Tab !",
+              "Quelle est la meilleure heure pour écouter de la musique ? | Deezer !",
+              "Que fait un geek quand il descend du métro ? | Il libère la RAM .",
+              "Quel est l'animal le plus connecté ? | Le porc USB .",
+              "Où vont les biscottes pour danser ? | En biscothèque .",
+              "Comment appelle-t-on un chat qui va dans l'espace ? | Un chatellite .",
+              "Que dit Fredon devant sa maison ? | **C’est là que j’hobbit .**",
+              "Que dit un chihuahua japonais pour dire bonjour ? | **Konichihuahua !**",
+              "Où va Messi quand il se blesse ? | À la pharmessi ! ",
+              "Quel est le système préféré des Italiens ? | Windows Vista .",
+              "Avec quelle monnaie les marins payent-ils ? | Avec des sous marins .",
+              "Que dit un informaticien quand il s'ennuie ? | **J'me fichier !**",
+              "Pourquoi est-ce que la Saint Valentin est davantage fêtée dans le Nord ? | Parce que ça se fête en famille !",
+              "Quel est le crustacé le plus léger de la mer ? | La palourde .",
+              "Pourquoi un chasseur emmène-t-il son fusil aux toilettes ? | Pour tirer la chasse !",
+              "Que fait un jardinier quand il ment ? | Il raconte des salades !",
+              "Quel est le fast food préféré de Flash ? | Quick .",
+              "Quel est le carburant le plus détendu ? | Le kérosène .",
+              "Que fait un geek quand il a peur ? | Il URL .",
+              "Que dit un rappeur quand il rentre dans une fromagerie ? | Faites du brie ! ",
+              "Comment savoir qu'un rat est content ? | Il souris .",
+              "Pourquoi est ce que Potter est triste ? | Parce que personne Harry à sa blague .",
+              "Qu'est ce qu'un cadeau qui s'en va ? | Une surprise party !",
+              "Pourquoi est-ce que les bières sont toujours stressées ? | Parce qu’elles ont la pression .",
+              "Qu'est-ce que fait un hibou dans une casserole ? | Hi-bou .",
+              "Pourquoi est ce que Hulk a un beau jardin ? | Parce qu’il a la main verte .",
+              "Pourquoi est-ce que les moutons aiment le chewing-gum ? | Parce que c’est bon pour la laine !",
+              "Quel est le sport préféré des insectes ? | Le criquet .",
+              "Quel est le café préféré des espagnols ? | Le café Olé .",
+              "Quel est l'aliment le plus hilarant ? | Le riz .",
+              "Que dit une noisette quand elle tombe à l'eau ? | **Au secours, je me noix !**",
+              "Que dit une imprimante dans l'eau ? | **J’ai papier !!!**",
+              "Quel est le jambon que tout le monde déteste ? | Le sale ami .",
+              "Que se passe-t-il quand 2 poissons s'énervent ? | Le thon monte .",
+              "Pourquoi est-ce que les vêtements sont toujours fatigués quand ils sortent de la machine ? | Parce qu’ils sont léssivés .",
+              "Pourquoi est-ce que les mexicains mangent-ils aux toilettes ? | Parce qu’ils aiment manger épicé !",
+              "Que faisaient les dinosaures quand ils n'arrivaient pas à se décider ? | Des tirageosaures !",
+              "Qu'est-ce qu'un tennisman adore faire ? | Rendre des services .",
+            ];
+        
+            let reponse = (replys[Math.floor(Math.random() * replys.length)])
+            message.channel.send(reponse)
+            console.log("Une blague a été demandée")
+          }
+
         if (!message.content.startsWith(prefix)) return;
           if (message.channel.type === "dm") return;
         var args = message.content.substring(prefix.length).split(" ");
@@ -131,28 +205,7 @@ bot.on('message', message => {
             console.log("Un utilisateur a réclamé ses statistiques")
          } 
 
-        if (!message.content.startsWith(prefix)) return;
-          if (message.channel.type === "dm") return;
-        var args = message.content.substring(prefix.length).split(" ");
 
-        switch (args[0].toLowerCase()) {
-            case "about":
-
-            var about_embed = new Discord.RichEmbed()
-
-            .setColor("#FE8F01")
-            .setTitle("Voici les informations à propos du serveur et du reste :")
-            .addField("A propos du bot :", "**Voici des infos sur le bot**")
-            .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation des Tutoriels, de @Albamort et de @Eliot .")
-            .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offrire un bot actif 24/7")
-            .addField("A propos d'Aradia :", "**Voici des infos à propos d' Arcadia**")
-            .addField("L'histoire d'Arcadia :", "Arcadia à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) pour (de base), aider lui et ses abonnés à communiquer au travers de channels, mais personne ne venait et il a décidé de continuer à développer son serveur et à en faire de la pub et cela a commencé à créer une communautée ! Un grand merci à vous, qui avez aidé le serveur à rester debout :) <3")
-            .addField("La commande secrete :", "Une commande est cachée dans le serveur ! Si tu la trouve en premier, tu gagne une surprise")
-            .setFooter("A propos - ArcaBot")
-            message.reply("Je t'ai envoyé les infos en MP")
-            message.author.send({embed: about_embed});
-            console.log("Un utilisateur a voulu en savoir plus (about)")
-        }
 
         if (!message.content.startsWith(prefix)) return;
           if (message.channel.type === "dm") return;
@@ -174,6 +227,133 @@ bot.on('message', message => {
             console.log("Un uilisateur a partagé le serveur !")
             break;
         }
+
+        if (!message.content.startsWith(prefix)) return;
+
+        var args = message.content.substring(prefix.length).split(" ");
+    
+        switch (args[0].toLowerCase()) { 
+    
+            case "GUYEDCDHSDDJ":
+    
+            var userCreateDate = message.author.createdAt.toString().split(" ");
+            var msgauthor = message.author.id;
+    
+            var stats_embed = new Discord.RichEmbed()
+            .setColor("#6699FF")
+            .setTitle(`Statistiques du joueurs : ${message.author.username}`)
+            .addField(`ID du joueurs :id:`, msgauthor, true)
+            .addField(`Date d'inscription du joueur :`, userCreateDate[1] + ' ' + userCreateDate[2] + ' ' + userCreateDate[3])
+            .setThumbnail(message.author.avatarURL)
+            message.reply("Tu peux regarder tes messages privés !")
+            message.author.send(stats_embed);
+    
+            break;
+            
+      case "play":
+      if (message.channel.type === "dm") return;
+        if (!args[1]) {
+    
+        message.channel.sendMessage("Tu dois m’indiquer un lien YouTube"); 
+    
+        return;
+    
+      }
+    
+        if(!message.member.voiceChannel) {
+    
+        message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
+    
+        return;
+    
+      }
+    
+    
+        if(!servers[message.guild.id]) servers[message.guild.id] = {
+    
+        queue: []
+    
+      };
+    
+    
+      var server = servers[message.guild.id];
+    
+    
+      server.queue.push(args[1]);
+    
+      if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+    
+      play(connection, message) 
+    
+      });
+    
+      break; 
+    
+      case "skip":
+      if (message.channel.type === "dm") return;
+        if(!message.member.voiceChannel) {
+    
+        message.channel.sendMessage(":x: Tu dois être dans un salon vocal"); 
+    
+        return;
+    
+      }
+    
+        var server = servers[message.guild.id];
+    
+        if(server.dispatcher) server.dispatcher.end();
+    
+        break;
+    
+      case "stop":
+      if (message.channel.type === "dm") return;
+    
+        if(!message.member.voiceChannel) 
+        
+        return message.channel.send(":x: Tu dois être dans un salon vocal");
+    
+        message.member.voiceChannel.leave();
+    
+        break;
+      
+      }
+    
+        if(message.content === prefix + "FXGW<ZFVDGSDFGE") {
+            var info_embed = new Discord.RichEmbed()
+            .setColor("#40A497")
+            .setTitle("Voici les informations sur moi et le serveur !")
+            .addField(" :robot: Nom :", `${client.user.tag}`, true)
+            .addField("Descriminateur du bot :hash:", `#${client.user.discriminator}`)
+            .addField("ID :id: ", `${client.user.id}`)
+            .addField("Nombre de membres", message.guild.members.size)
+            .addField("Nombre de catégories et de salons", message.guild.channels.size)
+            .setFooter("Info - Tuto")
+            message.channel.sendMessage(info_embed)
+            console.log("Un utilisateur a effectué la commande d'info !")
+    }
+
+    if (!message.content.startsWith(prefix)) return;
+    if (message.channel.type === "dm") return;
+  var args = message.content.substring(prefix.length).split(" ");
+
+  switch (args[0].toLowerCase()) {
+      case "about":
+
+      var about_embed = new Discord.RichEmbed()
+
+      .setColor("#FE8F01")
+      .setTitle("Voici les informations à propos du serveur et du reste :")
+      .addField("A propos du bot :", "**Voici des infos sur le bot**")
+      .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation des Tutoriels, de @Albamort et de @Eliot .")
+      .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offrire un bot actif 24/7")
+      .addField("A propos d'Aradia :", "**Voici des infos à propos d' Arcadia**")
+      .addField("L'histoire d'Arcadia :", "Arcadia à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) pour (de base), aider lui et ses abonnés à communiquer au travers de channels, mais personne ne venait et il a décidé de continuer à développer son serveur et à en faire de la pub et cela a commencé à créer une communautée ! Un grand merci à vous, qui avez aidé le serveur à rester debout :) <3")
+      .addField("La commande secrete :", "Une commande est cachée dans le serveur ! Si tu la trouve en premier, tu gagne une surprise")
+      .setFooter("A propos - ArcaBot")
+      message.reply("Je t'ai envoyé les infos en MP")
+      message.author.send({embed: about_embed});
+      console.log("Un utilisateur a voulu en savoir plus (about)")
+  }
 
     if(message.content.startsWith(prefix + "mute")) {
         if (message.channel.type === "dm") return;
@@ -236,7 +416,7 @@ bot.on('message', message => {
                 .addField("Tag : :hash:", `#${bot.user.discriminator}`)
                 .addField("ID : :id:", `${bot.user.id}`)
                 .addField("Date de création : :clock3:", message.guild.createdAt)
-                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.1")
+                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.2")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
         }
@@ -578,7 +758,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
   }
   
 
- bot.on('message', message => {
+
     if (message.content.startsWith(prefix + "8ball")) {
   let args = message.content.split(" ").slice(1);
   let tte = args.join(" ")
@@ -603,7 +783,8 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     let reponse = (replys[Math.floor(Math.random() * replys.length)])
     message.channel.send(reponse)
     console.log("La commande 8ball a été demandée")
-  }})})
+  }})
+
 
 
     bot.on('message', message => {
@@ -640,17 +821,4 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
       }
     })
     
-    function play(connection, message) {
-      var server = servers[message.guild.id];
-    
-      server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}))
-    
-      server.queue.shift();
-    
-      server.dispatcher.on("end", function() {
-        if (server.queue[0]) play(connexion, message);
-    
-        else connection.disconnect();
-    
-      });
-    }
+  
