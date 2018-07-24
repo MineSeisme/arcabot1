@@ -175,6 +175,111 @@ bot.on('message', message => {
               "Pourquoi est-ce que les mexicains mangent-ils aux toilettes ? | Parce qu’ils aiment manger épicé !",
               "Que faisaient les dinosaures quand ils n'arrivaient pas à se décider ? | Des tirageosaures !",
               "Qu'est-ce qu'un tennisman adore faire ? | Rendre des services .",
+	"L'autre jour j'ai raconté une blague à un parisien, il a Paris :/",
+
+"C'est l'histoire d'un shtroumf qui court, qui tombe et qui se fait un bleu .",
+
+"Que demande un douanier à un cochon qui passe la frontière ? | Son passe-porc .",
+
+"Pourquoi est-ce que les livres ont-ils toujours chaud ? | Parce qu’ils ont une couverture .",
+
+"Pourquoi les livres de maths sont toujours tristes ? | Car ils ont plein de problèmes .",
+
+"Vous connaissez l'histoire de l'armoire ? | Elle est pas commode...",
+
+"L'autre jour, j’ai raconté une blague sur Carrefour, mais elle a pas supermarché…",
+
+"Dans la phrase **le voleur a volé une télévision**, où est le sujet ? | En prison !",
+
+"- Docteur, je crois que j'ai besoin de lunettes. | - Oui certainement. Ici c'est une banque.",
+
+"Comment appelle-t-on un chat tombé dans un pot de peinture le jour de Noël ? | Un chat-peint de Noël !",
+
+"Tu connais le parfum **Pur Hasard** ? | Non ? Alors tu mets ton doigt dans ton derrière puis tu le sens et si ça sent bon c'est du **Pur Hasard**.",
+
+"Qu'est-ce qu'un steak qui n'en est pas un ? | Une pastèque ( pas steak ) !",
+
+"Quelles sont les lettres les moins visibles ? | **F , A , C**",
+
+"- Docteur j'ai mal à l'oeil qauche quand je bois mon café. | - Essayez d'enlever la cuillère de la tasse.",
+
+"Quelle est la différence entre un ascenseur et une cigarette ? | Il n'y en a pas. Tous les deux font des cendres...",
+
+"Quel est l'animal qui a le plus de dents ? | La petite souris !",
+
+"Qu'est-ce qu'une duche? | Une douche sans o...",
+
+"Que trouve t-on à l'intérieur d'un nez bien propre ? | Des empreintes digitales !",
+
+"Qui est-ce qui tourne la tête avant de pleurer ? | Le robinet ! ",
+
+"Qu'est-ce qu'un tube de colle avec une cape ? | SuperGlue !",
+
+"Qu'est-ce qui est vert et qui pousse sous l'eau ? | Un chou marin !",
+
+"Savez-vous pourquoi le Père Noël rit tout le temps ? | Parce que ce n'est pas lui qui paye les cadeaux !",
+
+"Quelle est la différence entre la grammaire et le divorce ? En grammaire, c'est le masculin qui l'emporte.",
+
+"Comment ramasse-t-on la papaye ? | Avec une foufourche .",
+
+"Comment apelles-t-on deux petits pois morts ? | Les restes d'un bon duel...",
+
+"Tu connais la blague du photographe ? | Elle est pas encore développée !",
+
+"Qu'est-ce qui est jaune et qui court vite ? Un citron pressé !",
+
+"Qu'est ce qui est jaune et qui attend ? | Johnatan !",
+
+"- Maman, c'est quoi de la lingerie coquine ? | - De la hot couture !",
+
+"Quelle est la différence entre une BMW et une LADA ? | Dans la BMW t'as l'airbag et dans la LADA t'as l'air con !",
+
+"Quel est le seul instrument à vent avec une corde ? | Le string !",
+
+"Que dit la sorcière à son mari quand elle trouve une chose très facile à faire ? | -Ce n’est pas sorcier !",
+
+"Vous avez 5 euros dans votre poche, vous en perdez deux. Qu'est-ce que vous avez dans votre poche ? | Un trou !",
+
+"Que dit un sucre à un café ? | -Plouff...",
+
+"Quelle est la ville la plus vieille du monde ? | Milan !",
+
+"Pourquoi Mickey Mousse ? | Parce que Mario brosse. ",
+
+"Un iceberg vient d'être papa. Comment l'annonce-t-il à ses amis ? | **C'est un petit glaçon** !",
+
+"Qu'est-ce qui fait **zzzb, zzzb,...** ? | Une mouche qui vole à l'envers !",
+
+"C’est l’histoire d’un poil. Avant il était bien, et maintenant, il est pubien...",
+
+"Comment s'appelle la femelle du hamster ? | Hamsterdam .",
+
+"Vous connaissez l'histoire du lit vertical ? | C'est une histoire à dormir debout.",
+
+"Pourquoi Barbie n'a pas d'enfants ? | Parce que Ken est vendu dans une boite séparée .",
+
+"Quel est le fruit préféré des militaires de carrière ? | La grenade .",
+
+"Pourquoi les pêcheurs ne sont jamais gros ? | Parce qu'ils surveillent leur ligne .",
+
+"C'est quoi un canife ? | Un petit fien .",
+
+"Que ne faut-il jamais dire à un antiquaire ? | **Alors, quoi de neuf ?",
+
+"Deux gars sont au camping. Il fait nuit, et l'un deux dit : **On va dormir : ça te tente ?**",
+
+"Qui sait parler toutes les langues sans jamais les apprivoiser ? Le téléphone !",
+
+"Connais-tu la blague sur le chocolat ? | Non ? C'est normal, je l'ai mangé hier ! ",
+
+"Connais-tu l’histoire de l’homme qui habitait juste en face du cimetière ? | - Non. | - Eh bien, maintenant, il habite en face de chez-lui !",
+
+"C'est l'histoire d’un pingouin qui respire par les fesses . | Un jour il s'assit et il meurt.",
+
+"Ce soir, on sera tous devant la télé. Pourquoi ? | Parce que derrière il n'y a rien a voir...",
+
+"Qu'est ce qui est jaune et plein de poils ? | **Une tartine beurrée tombée sur la moquette .**",
             ];
         
             let reponse = (replys[Math.floor(Math.random() * replys.length)])
