@@ -20,7 +20,7 @@ bot.on("guildMemberAdd", member => {
 
 bot.on("guildMemberAdd", member => {
   member.createDM().then(channel => {
-    return channel.send("```Salut et merci d'avoir rejoint **Arcadia** ! 👍  N'hésite pas a faire un tour dans le règlement pour savoir ce qu'il faut faire/pas faire ! 😉 Je te recommande également de visiter le channel Premiers_Pas pour savoir quoi faire !👌👣```");
+    return channel.send("```Salut et merci d'avoir rejoint Arcadia ! 👍  N'hésite pas a faire un tour dans le règlement pour savoir ce qu'il faut faire/pas faire ! 😉 Je te recommande également de visiter le channel Premiers_Pas pour savoir quoi faire !👌👣```");
   }).catch(console.error)
 });
 
@@ -84,6 +84,7 @@ bot.on('message', message => {
         }
 
         if (message.content === prefix + "m modo"){
+		if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send(":no_entry: Désolé, vous n'avez pas le grade approprié pour accéder à ce menu ! :no_entry:");
           var modo_embed = new Discord.RichEmbed()
                 .setColor("#E8FE00")
                 .setTitle("**Mes commandes de modération :**")
