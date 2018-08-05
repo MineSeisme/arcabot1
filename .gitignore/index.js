@@ -900,7 +900,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 .setDescription("Sondage")
                 .addField(thingToEcho, "Répondez avec :white_check_mark: ou :x:")
                 .setColor('RANDOM');
-                message.guild.channels.find("name", "sondages").sendEmbed(embed)
+                message.guild.channels.find("name", "❓sondages").sendEmbed(embed)
                 .then(function (message) {
                   message.react("✅")
                   message.react("❌")
