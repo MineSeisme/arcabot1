@@ -906,9 +906,9 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 .then(function (message) {
                   message.react("✅")
                   message.react("❌")
-		message.delete();
                 }).catch(function() {
                 });
+	      message.delete();
   }
     });
 
