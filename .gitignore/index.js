@@ -896,7 +896,6 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     bot.on('message', message => {
       if (message.content.startsWith(prefix + "sondage")) {
         if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
-	      message.delete();
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
             var embed = new Discord.RichEmbed()
@@ -907,6 +906,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 .then(function (message) {
                   message.react("✅")
                   message.react("❌")
+		message.delete();
                 }).catch(function() {
                 });
   }
