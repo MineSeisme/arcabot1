@@ -536,7 +536,7 @@ if(message.content.startsWith(prefix + "clear")) {
 
 	if(!args[0]) return message.channel.send(":no_entry: Indique un nombre de messages à supprimer ! :no_entry:")
 	message.channel.bulkDelete(args[0]).then(() => {
-  message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`);
+  message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`).then(message => {message.delete(10000)});
   message.delete();
 	console.log("La commande Clear a été demandée !")
 	})
