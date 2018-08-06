@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const CLEAR_MESSAGES = '@clearMessages';
 const {get} = require('snekfetch');
 const queue = new Map();
 var bot = new Discord.Client();
@@ -528,22 +527,20 @@ bot.on('message', message => {
         }
 
 
-if(message.content.startsWith(prefix + "clear")) {
-  if (message.channel.type === "dm") return;
-    if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
-
-	let args = message.content.split(" ").slice(1);
-
-	if(!args[0]) return message.channel.send(":no_entry: Indique un nombre de messages à supprimer ! :no_entry:")
-	message.channel.bulkDelete(args[0]).then(() => {
-  message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`).then(message => {message.delete(10000)});
-  message.delete();
-	console.log("La commande Clear a été demandée !")
-	})
-
-}
-
-
+        if(message.content.startsWith(prefix + "clear")){
+          if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGE")) return message.channel.send(`:no_entry:  ${message.author}, je pense que vous n'avez pas les permissions nécessaires pour ça. ツ:no_entry:`);
+   
+           let args = message.content.split(" ").slice(1);
+   
+           if(!args[0]) return message.channel.send(` ${message.author}, :no_entry: Il faut préciser le nombre de messages à supprimer ! (Maximum 100 messages):no_entry:`)
+           message.channel.bulkDelete(args[0]).then(() => {
+                     message.channel.send(`:white_check_mark: ${args[0]} message(s) a/ont bien été supprimé(s) avec succès ! :white_check_mark:`).then(message =>
+           bot.setTimeout(function() {
+             message.delete();
+           }, 2000)
+         );
+           console.log("Des messages ont été supprimés avec succès!")}) 
+       }
 
 
  if(message.content.startsWith(prefix + "kick")) {
