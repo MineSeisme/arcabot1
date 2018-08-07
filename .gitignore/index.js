@@ -1,9 +1,15 @@
 const Discord = require('discord.js');
+
+const client = new Discord.Client();
+
 const {get} = require('snekfetch');
+
+const ytdl = require('ytdl-core');
+
 const queue = new Map();
-var bot = new Discord.Client();
-var dispatcher;
+
 var servers = {};
+
 var prefix = ("-")
 
 bot.on('ready', () => {
@@ -12,6 +18,23 @@ bot.on('ready', () => {
 });
 
 bot.login(process.env.TOKEN);
+
+function play(connection, message) {
+  
+  var server = servers[message.guild.id];
+
+  server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
+
+  server.queue.shift();
+
+  server.dispatcher.on("end", function() { 
+    if (server.queue[0]) play(connection, message);
+
+    else connection.disconnect();
+
+  });
+}
+
 
 bot.on("guildMemberAdd", member => {
   member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
