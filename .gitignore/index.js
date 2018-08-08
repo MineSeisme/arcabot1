@@ -17,7 +17,7 @@ client.on('ready', () => {
     console.log("Le bot a démarré !");
 });
 
-bot.login(process.env.TOKEN);
+client.login(process.env.TOKEN);
 
 function play(connection, message) {
   
