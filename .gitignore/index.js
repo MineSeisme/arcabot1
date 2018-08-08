@@ -36,26 +36,26 @@ function play(connection, message) {
 }
 
 
-bot.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", member => {
   member.guild.channels.find("name", "discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
 })
 
-bot.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", member => {
   member.createDM().then(channel => {
     return channel.send("```Salut et merci d'avoir rejoint Arcadia ! 👍  N'hésite pas a faire un tour dans le règlement pour savoir ce qu'il faut faire/pas faire ! 😉 Je te recommande également de visiter le channel Premiers_Pas pour savoir quoi faire !👌👣```");
   }).catch(console.error)
 });
 
-bot.on("guildMemberRemove", member => {
+client.on("guildMemberRemove", member => {
   member.guild.channels.find("name", "discussion").send(`${member} est parti d'**Arcadia** 🙁 👎 `)
 })
 
-bot.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
   var role = member.guild.roles.find('name', 'Membres Connectés');
   member.addRole(role)
 })
                 
-bot.on('message', message => {
+client.on('message', message => {
   if (message.channel.type === "dm") return;
         if (message.content === "-surprise"){
           var find_embed = new Discord.RichEmbed()
@@ -914,7 +914,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     console.log("La commande 8ball a été demandée")
   }})
 
-    bot.on('message', message => {
+    client.on('message', message => {
       if (message.content.startsWith(prefix + "sondage")) {
         if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
 	    message.delete();
@@ -933,7 +933,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
   }
     });
 
-    bot.on('message', message => {
+    client.on('message', message => {
       if (message.content.startsWith(prefix + "Rcat")){
         try {
             get('https://aws.random.cat/meow').then(res =>{
