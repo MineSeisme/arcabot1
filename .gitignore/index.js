@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 const {get} = require('snekfetch');
 
-const ytdl = require('ytdl-core');
+//const ytdl = require('ytdl-core');
 
 const queue = new Map();
 
