@@ -13,7 +13,7 @@ var servers = {};
 var prefix = ("-")
 
 client.on('ready', () => {
-    bot.user.setPresence({ game: { name: '[-all]', type: 0}});
+    client.user.setPresence({ game: { name: '[-all]', type: 0}});
     console.log("Le bot a démarré !");
 });
 
