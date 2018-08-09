@@ -116,6 +116,7 @@ client.on('message', message => {
                 .addField("-seewarns < @ + nom de la personne > :", "Affiche les warns de la personne mentionnée .")
                 .addField("-kick :", "Expulse une personne sélectionnée du serveur .")
                 .addField("-ban :", "Ban une personne sélectionnée du serveur .")
+	  	.addField("-sondage :", "Envoie votre sondage dans le channel #❓sondages .")
                 message.channel.sendEmbed(modo_embed);
                 console.log("Les commandes de Modération ont été demandées !");
             }
