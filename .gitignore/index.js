@@ -561,7 +561,7 @@ if(message.content.startsWith(prefix + "clear")) {
   message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`).then(message =>
         bot.setTimeout(function() {
           message.delete();
-        }, 2000)
+        }, 500)
       );
   message.delete();
 	console.log("La commande Clear a été demandée !")
