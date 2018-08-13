@@ -6,7 +6,8 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "ytdl-core": "^0.24.0",
-    "ffmepg": "^0.0.4"
+    "ffmepg": "^0.0.4",
+    "npm": "^5.6.0"
   },
   "devDependencies": {},
   "scripts": {
