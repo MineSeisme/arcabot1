@@ -55,7 +55,7 @@ client.on('guildMemberAdd', member => {
   member.addRole(role)
 })
                 
-client.on('message', message => {
+bot.on('message', message => {
   if (message.channel.type === "dm") return;
         if (message.content === "-surprise"){
           var find_embed = new Discord.RichEmbed()
@@ -101,12 +101,13 @@ client.on('message', message => {
                 .addField("-8ball :", "Donne une réponse aléatoire à une question donnée .")
                 .addField("-Rcat :", "Affiche une image de chat aléatoire .")
                 .addField("-joke", "Affiche une blague aléatoire .")
+                .addField("-pfc (pierre | feuille | ciseaux)", "Lance une partie de pierre feuille ciseaux .")
                 message.channel.sendEmbed(fun_embed);
                 console.log("Les commandes d'Amusement ont été demandées !");
         }
 
         if (message.content === prefix + "m modo"){
-		if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send(":no_entry: Désolé, vous n'avez pas le grade approprié pour accéder à ce menu ! :no_entry:");
+          if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send(":no_entry: Désolé, vous n'avez pas le grade approprié pour accéder à ce menu ! :no_entry:");
           var modo_embed = new Discord.RichEmbed()
                 .setColor("#E8FE00")
                 .setTitle("**Mes commandes de modération :**")
@@ -116,7 +117,7 @@ client.on('message', message => {
                 .addField("-seewarns < @ + nom de la personne > :", "Affiche les warns de la personne mentionnée .")
                 .addField("-kick :", "Expulse une personne sélectionnée du serveur .")
                 .addField("-ban :", "Ban une personne sélectionnée du serveur .")
-	  	.addField("-sondage :", "Envoie votre sondage dans le channel #❓sondages .")
+                .addField("-sondage :", "Envoie votre sondage dans le channel #❓sondages .")
                 message.channel.sendEmbed(modo_embed);
                 console.log("Les commandes de Modération ont été demandées !");
             }
@@ -199,7 +200,7 @@ client.on('message', message => {
               "Pourquoi est-ce que les mexicains mangent-ils aux toilettes ? | Parce qu’ils aiment manger épicé !",
               "Que faisaient les dinosaures quand ils n'arrivaient pas à se décider ? | Des tirageosaures !",
               "Qu'est-ce qu'un tennisman adore faire ? | Rendre des services .",
-	"L'autre jour j'ai raconté une blague à un parisien, il a Paris :/",
+              "L'autre jour j'ai raconté une blague à un parisien, il a Paris :/",
 
 "C'est l'histoire d'un shtroumf qui court, qui tombe et qui se fait un bleu .",
 
@@ -335,9 +336,8 @@ client.on('message', message => {
          } 
 
 
-
         if (!message.content.startsWith(prefix)) return;
-          if (message.channel.type === "dm") return;
+          if (message.channel.type === "dm") return message.channel.send("Désolé, je ne répond pas au MP")
         var args = message.content.substring(prefix.length).split(" ");
 
         switch (args[0].toLowerCase()) {
@@ -347,7 +347,7 @@ client.on('message', message => {
 
             var share_embed = new Discord.RichEmbed()
 
-            .setColor("#01FE29")
+            .setColor('RANDOM')
             .setTitle("Voici le lien pour inviter des gens sur Arcadia : :thumbsup:")
             .addField("https://discord.gg/Q2ghAg3", "Ce lien n'expire pas :)")
             .setFooter("Nous te remercions pour avoir participé au développement du serveur ! <3 👏 ")
@@ -505,6 +505,8 @@ client.on('message', message => {
         })
     }
 
+
+
     if(message.content.startsWith(prefix + "unmute")) {
       if (message.channel.type === "dm") return;
         if(!message.guild.member(message.author).hasPermission("MUTE_MEMBERS")) return message.channel.send("Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :thumbsdown:");
@@ -545,30 +547,31 @@ client.on('message', message => {
                 .addField("Tag : :hash:", `#${bot.user.discriminator}`)
                 .addField("ID : :id:", `${bot.user.id}`)
                 .addField("Date de création : :clock3:", message.guild.createdAt)
-                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.2")
+                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.4")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
         }
 
 
-if(message.content.startsWith(prefix + "clear")) {
-  if (message.channel.type === "dm") return;
-    if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
-
-	let args = message.content.split(" ").slice(1);
-
-	if(!args[0]) return message.channel.send(":no_entry: Indique un nombre de messages à supprimer ! :no_entry:")
-	message.channel.bulkDelete(args[0]).then(() => {
-  message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`).then(message =>
-        bot.setTimeout(function() {
+        if(message.content.startsWith(prefix + "clear")) {
+          if (message.channel.type === "dm") return;
+            if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
+        
+          let args = message.content.split(" ").slice(1);
+        
+          if(!args[0]) return message.channel.send(":no_entry: Indique un nombre de messages à supprimer ! :no_entry:")
+          message.channel.bulkDelete(args[0]).then(() => {
+          message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`).then(message =>
+                bot.setTimeout(function() {
+                  message.delete();
+                }, 2000)
+              );
           message.delete();
-        }, 500)
-      );
-  message.delete();
-	console.log("La commande Clear a été demandée !")
-	})
-
-}
+          console.log("La commande Clear a été demandée !")
+          })
+        
+        }
+        
 
  if(message.content.startsWith(prefix + "kick")) {
   if (message.channel.type === "dm") return;
@@ -913,7 +916,8 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     let reponse = (replys[Math.floor(Math.random() * replys.length)])
     message.channel.send(reponse)
     console.log("La commande 8ball a été demandée")
-  }})
+  }
+
           //---------------Pierre Feuille Ciseaux----------------------------
 
           //---------------Pierre--------------------------------------
@@ -1020,4 +1024,3 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     })
     
   })
-
