@@ -997,7 +997,8 @@ client.on('message', message => {
             var embed = new Discord.RichEmbed()
                 .setDescription("Sondage")
                 .addField(thingToEcho, "Répondez avec :white_check_mark: ou :x:")
-                .setColor('RANDOM');
+                .setColor('RANDOM')
+                .setFooter(`Sondage envoyé par ${message.author.username} .`)
                 message.guild.channels.find("name", "❓sondages").sendEmbed(embed)
                 .then(function (message) {
                   message.react("✅")
