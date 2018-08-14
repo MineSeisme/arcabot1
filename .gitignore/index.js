@@ -914,8 +914,77 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     message.channel.send(reponse)
     console.log("La commande 8ball a été demandée")
   }})
+          //---------------Pierre Feuille Ciseaux----------------------------
 
-    client.on('message', message => {
+          //---------------Pierre--------------------------------------
+
+          if (message.content.startsWith(prefix + "pfc pierre")) {
+          let args = message.content.split(" ").slice(1);
+        
+            var replys = [
+              "Pierre ! | Il y a égalité !",
+              "Feuille ! | J'ai gagné !",
+              "Ciseaux ! | Tu a gagné !"
+            ];
+        
+
+            let reponse = (replys[Math.floor(Math.random() * replys.length)])
+            message.channel.send(reponse)
+            console.log("La commande pfc a été demandée")
+          }
+
+            //------------------Feuille---------------------------------------
+
+            if (message.content.startsWith(prefix + "pfc feuille")) {
+            let args = message.content.split(" ").slice(1);
+          
+              var replys = [
+                "Pierre ! | Tu a gagné !",
+                "Feuille ! | Il y a égalité !",
+                "Ciseaux ! | J'ai gagné !"
+              ];
+          
+              let reponse = (replys[Math.floor(Math.random() * replys.length)])
+              message.channel.send(reponse)
+              console.log("La commande pfc a été demandée")
+            }
+
+            //--------------------Ciseaux----------------------------------
+
+            if (message.content.startsWith(prefix + "pfc ciseaux")) {
+              let args = message.content.split(" ").slice(1);
+            
+                var replys = [
+                  "Pierre ! | J'ai gagné !",
+                  "Feuille ! | Tu a gagné !",
+                  "Ciseaux ! | Il y a égalité"
+                ];
+            
+                let reponse = (replys[Math.floor(Math.random() * replys.length)])
+                message.channel.send(reponse)
+                console.log("La commande pfc a été demandée")
+              }
+
+              if(message.content === prefix + "ping") {
+                var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
+              var diff = (Date.now() - start); 
+              var API = (bot.ping).toFixed(2)
+                  
+                  var embed = new Discord.RichEmbed()
+                  .setTitle(`🏓 Pong!`)
+                  .setColor('RANDOM')
+                  .addField("📶 Ping / Latence:", `${diff}ms`, true)
+                  .addField("💻 API", `${API}ms`, true)
+                  message.edit(embed);
+              message.edit(embed);
+                  message.edit(embed);
+              message.edit(embed);
+                console.log("Le bot a trouvé son ping")
+              });
+              
+              }
+
+    bot.on('message', message => {
       if (message.content.startsWith(prefix + "sondage")) {
         if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
 	    message.delete();
@@ -932,9 +1001,9 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 }).catch(function() {
                 });
   }
-    });
+});
 
-    client.on('message', message => {
+    bot.on('message', message => {
       if (message.content.startsWith(prefix + "Rcat")){
         try {
             get('https://aws.random.cat/meow').then(res =>{
@@ -950,4 +1019,5 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
       }
     })
     
-  
+  })
+
