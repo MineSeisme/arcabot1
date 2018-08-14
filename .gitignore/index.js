@@ -55,7 +55,7 @@ client.on('guildMemberAdd', member => {
   member.addRole(role)
 })
                 
-bot.on('message', message => {
+client.on('message', message => {
   if (message.channel.type === "dm") return;
         if (message.content === "-surprise"){
           var find_embed = new Discord.RichEmbed()
