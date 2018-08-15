@@ -99,6 +99,7 @@ client.on('message', message => {
                 .setColor("#CDA16F")
                 .setTitle("**Mes commandes pour s'amuser :**")
                 .addField("-8ball :", "Donne une réponse aléatoire à une question donnée .")
+                .addField("-roll", "Donne un chiffre compris entre 0 et 10 .")
                 .addField("-Rcat :", "Affiche une image de chat aléatoire .")
                 .addField("-joke", "Affiche une blague aléatoire .")
                 .addField("-pfc (pierre | feuille | ciseaux)", "Lance une partie de pierre feuille ciseaux .")
@@ -972,13 +973,13 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               if(message.content === prefix + "ping") {
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
-              var API = (client.ping).toFixed(2)
+              var API = (bot.ping).toFixed(2)
                   
                   var embed = new Discord.RichEmbed()
                   .setTitle(`🏓 Pong!`)
                   .setColor('RANDOM')
-                  .addField("↔️ Ping / Latence:", `${diff}ms`, true)
-                  .addField("🛰 API", `${API}ms`, true)
+                  .addField("📶 Ping / Latence:", `${diff}ms`, true)
+                  .addField("💻 API", `${API}ms`, true)
                   message.edit(embed);
               message.edit(embed);
                   message.edit(embed);
@@ -988,6 +989,42 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               
               }
 
+              if (message.content.startsWith(prefix + "roll")) {
+                let args = message.content.split(" ").slice(1);
+              
+                  var replys = [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10"
+                  ];
+              
+                  let reponse = (replys[Math.floor(Math.random() * replys.length)])
+                  message.channel.send(reponse)
+                  console.log("La commande roll a été demandée")
+                }
+
+                if (message.content.startsWith(prefix + "Rcat")){
+                  try {
+                      get('https://aws.random.cat/meow').then(res =>{
+                        const embed = new Discord.RichEmbed()
+                        .setDescription(`:cat: Voila un chat pour ${message.author.username}`)
+                        .setImage(res.body.file)
+                        .setColor('RANDOM')
+                        return message.channel.send({embed});
+                      })
+                  } catch(err) {
+                      return message.channel.send(error.stack);
+                  }
+                }
+          
       if (message.content.startsWith(prefix + "sondage")) {
         if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
 	    message.delete();
@@ -1003,21 +1040,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   message.react("✅")
                   message.react("❌")
                 }).catch(function() {
-                });
-};
+                })
+  }
+})
 
-      if (message.content.startsWith(prefix + "Rcat")){
-        try {
-            get('https://aws.random.cat/meow').then(res =>{
-              const embed = new Discord.RichEmbed()
-              .setDescription(`:cat: Voila un chat pour ${message.author.username}`)
-              .setImage(res.body.file)
-              .setColor('RANDOM')
-              return message.channel.send({embed});
-            })
-        } catch(err) {
-            return message.channel.send(error.stack);
-        }
-      }
-    })
-    
