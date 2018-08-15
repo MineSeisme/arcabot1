@@ -973,7 +973,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               if(message.content === prefix + "ping") {
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
-              var API = (bot.ping).toFixed(2)
+              var API = (client.ping).toFixed(2)
                   
                   var embed = new Discord.RichEmbed()
                   .setTitle(`🏓 Pong!`)
