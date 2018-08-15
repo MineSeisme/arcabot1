@@ -1004,10 +1004,8 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   message.react("❌")
                 }).catch(function() {
                 });
-  }
 });
 
-    client.on('message', message => {
       if (message.content.startsWith(prefix + "Rcat")){
         try {
             get('https://aws.random.cat/meow').then(res =>{
@@ -1023,4 +1021,3 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
       }
     })
     
-  })
