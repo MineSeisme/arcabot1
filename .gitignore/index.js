@@ -1004,7 +1004,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   message.react("❌")
                 }).catch(function() {
                 });
-});
+};
 
       if (message.content.startsWith(prefix + "Rcat")){
         try {
