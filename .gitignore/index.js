@@ -988,7 +988,6 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               
               }
 
-client.on('message', message => {
       if (message.content.startsWith(prefix + "sondage")) {
         if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
 	    message.delete();
