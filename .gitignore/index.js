@@ -979,6 +979,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   .setColor('RANDOM')
                   .addField("↔️ Ping / Latence:", `${diff}ms`, true)
                   .addField("🛰 API", `${API}ms`, true)
+		  .setFooter(`Voici le ping de ${message.author.username} .`)
                   message.edit(embed);
               message.edit(embed);
                   message.edit(embed);
