@@ -977,8 +977,8 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   var embed = new Discord.RichEmbed()
                   .setTitle(`🏓 Pong!`)
                   .setColor('RANDOM')
-                  .addField("📶 Ping / Latence:", `${diff}ms`, true)
-                  .addField("💻 API", `${API}ms`, true)
+                  .addField("↔️ Ping / Latence:", `${diff}ms`, true)
+                  .addField("🛰 API", `${API}ms`, true)
                   message.edit(embed);
               message.edit(embed);
                   message.edit(embed);
