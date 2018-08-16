@@ -7,7 +7,6 @@
     "discord.js": "^11.3.2",
     "ytdl-core": "^0.24.0",
     "npm": "^5.6.0",
-    "ffmpeg-binaries": "^4.0.0"
   },
   "devDependencies": {},
   "scripts": {
