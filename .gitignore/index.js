@@ -78,7 +78,9 @@ client.on('message', message => {
                 .addField("Commandes d'infos : 💡", "-m info")
                 .addField("Commandes fun : 🎉", "-m fun")
                 .addField("Commandes de modération : ⚖️", "-m modo")
+                .addField("Commandes d'aide : ❤️", "-m dev")
                 .addField("Autres commandes : 💎", "-m other")
+                .setThumbnail(message.author.avatarURL)
                 message.channel.sendEmbed(help_embed);
             console.log("La commande Principal à été demandée !");
         }
@@ -121,6 +123,15 @@ client.on('message', message => {
                 .addField("-sondage :", "Envoie votre sondage dans le channel #❓sondages .")
                 message.channel.sendEmbed(modo_embed);
                 console.log("Les commandes de Modération ont été demandées !");
+            }
+
+            if (message.content === prefix + "m dev"){
+              var dev_embed = new Discord.RichEmbed()
+              .setColor("#FF0101")
+              .setTitle("**Mes commandes pour m'aider :**")
+              .addField("-sendbug", "Cette commande vous permet de signaler un bug d'Arcabot")
+              message.channel.sendEmbed(dev_embed);
+              console.log("Les commandes pour m'aider ont été demandées !");
             }
 
             if (message.content === prefix + "m other"){
@@ -291,7 +302,7 @@ client.on('message', message => {
 
 "C'est quoi un canife ? | Un petit fien .",
 
-"Que ne faut-il jamais dire à un antiquaire ? | **Alors, quoi de neuf ?",
+"Que ne faut-il jamais dire à un antiquaire ? | **Alors, quoi de neuf ?**",
 
 "Deux gars sont au camping. Il fait nuit, et l'un deux dit : **On va dormir : ça te tente ?**",
 
@@ -973,7 +984,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               if(message.content === prefix + "ping") {
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
-              var API = (client.ping).toFixed(2)
+              var API = (bot.ping).toFixed(2)
                   
                   var embed = new Discord.RichEmbed()
                   .setTitle(`🏓 Pong!`)
@@ -984,7 +995,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               message.edit(embed);
                   message.edit(embed);
               message.edit(embed);
-                console.log("Le bot a trouvé son ping")
+                console.log("Le ping a été demandé")
               });
               
               }
@@ -1025,6 +1036,21 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   }
                 }
           
+                if (message.content.startsWith(prefix + "sendbug")){
+                  let args = message.content.split(" ").slice(1);
+                var err = args.slice(0).join(" ")
+                if(!err) return message.channel.send("⚠️ Veuillez préciser la nature du bug ! ⚠️")
+
+                var embed = new Discord.RichEmbed()
+                .setColor('RANDOM')
+                .setTitle("⚠️ Un bug a été détecté ! ⚠️")
+                .setDescription(`Description du bug : ${err}`)
+                .setFooter(`Bug découvert par ${message.author.username}`)
+
+                bot.guilds.get("465822087219511297").channels.get("479591468869091328").send(embed)
+                message.channel.send("Le problème à été envoyé à l'équipe d'Arcadia ! :thumbsup:")
+                }
+
       if (message.content.startsWith(prefix + "sondage")) {
         if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
 	    message.delete();
@@ -1043,4 +1069,3 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 })
   }
 })
-
