@@ -47,7 +47,7 @@ client.on("guildMemberAdd", member => {
 });
 
 client.on("guildMemberRemove", member => {
-  member.guild.channels.find("name", "discussion").send(`${member} est parti d'**Arcadia** 🙁 👎 `)
+  member.guild.channels.find("name", "💬discussion").send(`${member} est parti d'**Arcadia** 🙁 👎 `)
 })
 
 client.on('guildMemberAdd', member => {
