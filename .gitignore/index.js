@@ -984,7 +984,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 console.log("La commande pfc a été demandée")
               }
 
-              if(message.content === prefix + "ping") {
+              if(message.content === prefix + "ping"){
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
               var API = (client.ping).toFixed(2)
