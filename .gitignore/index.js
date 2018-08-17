@@ -559,9 +559,9 @@ client.on('message', message => {
                 .setColor("#0031F7")
                 .setTitle("Ma carte d'identitée :")
                 .addField("Nom :", "**ArcaBot**")
-                .addField("Tag : :hash:", `#${bot.user.discriminator}`)
-                .addField("ID : :id:", `${bot.user.id}`)
-                .addField("Date de création : :clock3:", bot.user.createdAt)
+                .addField("Tag : :hash:", `#${client.user.discriminator}`)
+                .addField("ID : :id:", `${client.user.id}`)
+                .addField("Date de création : :clock3:", client.user.createdAt)
                 .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.4")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
@@ -987,7 +987,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               if(message.content === prefix + "ping") {
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
-              var API = (bot.ping).toFixed(2)
+              var API = (client.ping).toFixed(2)
                   
                   var embed = new Discord.RichEmbed()
                   .setTitle(`🏓 Pong!`)
