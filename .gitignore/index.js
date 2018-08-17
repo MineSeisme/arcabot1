@@ -35,7 +35,7 @@ function play(connection, message) {
 
 
 client.on("guildMemberAdd", member => {
-  member.guild.channels.find("name", "💬discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 `)
+  member.guild.channels.find("name", "💬discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 \nTu est actuellement le ${message.guild.members.size} ème membre du serveur ;)`)
 })
 
 client.on("guildMemberAdd", member => {
@@ -78,7 +78,10 @@ client.on('message', message => {
                 .addField("Commandes de modération : ⚖️", "-m modo")
                 .addField("Commandes d'aide : ❤️", "-m dev")
                 .addField("Autres commandes : 💎", "-m other")
+                .addField("** **", "** **")
                 .setThumbnail(message.author.avatarURL)
+                .setImage(message.guild.iconURL)
+                .setFooter("Menu - ArcaBot")
                 message.channel.sendEmbed(help_embed);
             console.log("La commande Principal à été demandée !");
         }
@@ -483,7 +486,7 @@ client.on('message', message => {
       .setColor("#FE8F01")
       .setTitle("Voici les informations à propos du serveur et du reste :")
       .addField("A propos du bot :", "**Voici des infos sur le bot**")
-      .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation des Tutoriels, de @Albamort et de @Eliot .")
+      .addField("Crédits :", "Ce bot à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) sur Visual Code avec node.js (en JavaScript) avec la participation de @RΞd CrΛft ツ, des Tutoriels et de @Eliot .")
       .addField("Hébergement", "Il est hébergé sur Heroku afin de vous offrire un bot actif 24/7")
       .addField("A propos d'Aradia :", "**Voici des infos à propos d' Arcadia**")
       .addField("L'histoire d'Arcadia :", "Arcadia à été créé par Valentin (@𝕸𝖎𝖓𝖊𝕾𝖊𝖎𝖘𝖒𝖊) pour (de base), aider lui et ses abonnés à communiquer au travers de channels, mais personne ne venait et il a décidé de continuer à développer son serveur et à en faire de la pub et cela a commencé à créer une communautée ! Un grand merci à vous, qui avez aidé le serveur à rester debout :) <3")
@@ -543,8 +546,10 @@ client.on('message', message => {
             var sign_embed = new Discord.RichEmbed()
              .setColor("#FA0102")
              .setTitle("Les infos d'Arcadia")
-             .addField("Nombre d'utilisateurs sur le serveur :", message.guild.members.size)
+             .addField("Date de création d'Arcadia :", message.guild.createdAt)
              .addField("Nombre de salons et de catégories :", message.guild.channels.size)
+             .addField("Nombre d'utilisateurs sur le serveur :", message.guild.members.size)
+             .addField("Dont :", `**${message.guild.members.filter(o => o.presence.status === 'online').size}** En Ligne\n**${message.guild.members.filter(i => i.presence.status === 'idle').size}** Ne pas déranger\n**${message.guild.members.filter(off => off.presence.status === 'offline').size}** Hors ligne/invisible\n**${message.guild.members.filter(s => s.presence.status === 'streaming').size}** En Streaming`)
              message.channel.sendEmbed(sign_embed)
              console.log("Le pannel a été affiché !")
         }
@@ -556,7 +561,7 @@ client.on('message', message => {
                 .addField("Nom :", "**ArcaBot**")
                 .addField("Tag : :hash:", `#${bot.user.discriminator}`)
                 .addField("ID : :id:", `${bot.user.id}`)
-                .addField("Date de création : :clock3:", message.guild.createdAt)
+                .addField("Date de création : :clock3:", bot.user.createdAt)
                 .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.4")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
