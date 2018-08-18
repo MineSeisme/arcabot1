@@ -35,7 +35,7 @@ function play(connection, message) {
 
 
 client.on("guildMemberAdd", member => {
-  member.guild.channels.find("name", "💬discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 \nTu est actuellement le ${client.users.size - 7} ème membre du serveur ;)`)`)
+  member.guild.channels.find("name", "💬discussion").send(`Salut ${member}, Bienvenue sur **Arcadia** !🎈🎉👍 \nTu est actuellement le ${client.users.size - 7} ème membre du serveur ;)`)
 })
 
 client.on("guildMemberAdd", member => {
