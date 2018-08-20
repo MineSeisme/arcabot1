@@ -1051,7 +1051,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 .setDescription(`Description du bug : ${err}`)
                 .setFooter(`Bug découvert par ${message.author.username}`)
 
-                bot.guilds.get("465822087219511297").channels.get("479591468869091328").send(embed)
+                client.guilds.get("465822087219511297").channels.get("479591468869091328").send(embed)
                 message.channel.send("Le problème à été envoyé à l'équipe d'Arcadia ! :thumbsup:")
                 }
 	
@@ -1066,7 +1066,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 .setDescription(`Description de l'idée : ${idé}`)
                 .setFooter(`Idée proposée par ${message.author.username}`)
 
-                bot.guilds.get("465822087219511297").channels.get("481109899879645204").send(embed)
+                client.guilds.get("465822087219511297").channels.get("481109899879645204").send(embed)
                 message.channel.send("Votre idée a été envoyé à l'équipe d'Arcadia ! :thumbsup:")
                 }
 
