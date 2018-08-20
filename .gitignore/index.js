@@ -131,6 +131,7 @@ client.on('message', message => {
               .setColor("#FF0101")
               .setTitle("**Mes commandes pour m'aider :**")
               .addField("-sendbug", "Cette commande vous permet de signaler un bug d'Arcabot")
+              .addField("-idée :", "Utilisez cette commande pour proposer une idée de commande/amélioration à l'équipe d'Arcadia !")
               message.channel.sendEmbed(dev_embed);
               console.log("Les commandes pour m'aider ont été demandées !");
             }
@@ -1052,6 +1053,21 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
 
                 bot.guilds.get("465822087219511297").channels.get("479591468869091328").send(embed)
                 message.channel.send("Le problème à été envoyé à l'équipe d'Arcadia ! :thumbsup:")
+                }
+	
+                if (message.content.startsWith(prefix + "idée")){
+                  let args = message.content.split(" ").slice(1);
+                var idé = args.slice(0).join(" ")
+                if(!idé) return message.channel.send("🛑Veuillez indiquer votre idée !🛑")
+
+                var embed = new Discord.RichEmbed()
+                .setColor('RANDOM')
+                .setTitle("💬Une idée nous a été proposée💬")
+                .setDescription(`Description de l'idée : ${idé}`)
+                .setFooter(`Idée proposée par ${message.author.username}`)
+
+                bot.guilds.get("465822087219511297").channels.get("481109899879645204").send(embed)
+                message.channel.send("Votre idée a été envoyé à l'équipe d'Arcadia ! :thumbsup:")
                 }
 
       if (message.content.startsWith(prefix + "sondage")) {
