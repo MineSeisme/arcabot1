@@ -1066,25 +1066,157 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 .setDescription(`Description de l'idée : ${idé}`)
                 .setFooter(`Idée proposée par ${message.author.username}`)
 
-                client.guilds.get("465822087219511297").channels.get("481109899879645204").send(embed)
+                bot.guilds.get("465822087219511297").channels.get("481109899879645204").send(embed)
                 message.channel.send("Votre idée a été envoyé à l'équipe d'Arcadia ! :thumbsup:")
                 }
 
-      if (message.content.startsWith(prefix + "sondage")) {
-        if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Désolé, vous n'avez pas la permission nécessaire pour executer la commande ! :no_entry:");
-	    message.delete();
-            let args = message.content.split(" ").slice(1);
-            let thingToEcho = args.join(" ");
-            var embed = new Discord.RichEmbed()
+                if(message.content.startsWith(prefix + "sondage")) {
+                  let args = message.content.split(" ").slice(1);
+                 if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":no_entry: Vous n'avez pas la permission nécessaire pour exéctuer la commande ! :no_entry:");
+             var sondage = args.slice(0).join(" ")
+             if(!sondage) return message.reply("Veuillez indiquer votre sondage !")
+             var embed = new Discord.RichEmbed()
                 .setDescription("Sondage")
-                .addField(thingToEcho, "Répondez avec :white_check_mark: ou :x:")
+                .addField(`${sondage}`, "Répondez avec :white_check_mark: ou :x:")
                 .setColor('RANDOM')
                 .setFooter(`Sondage envoyé par ${message.author.username} .`)
                 message.guild.channels.find("name", "❓sondages").sendEmbed(embed)
-                .then(function (message) {
+                .then(message =>{
                   message.react("✅")
                   message.react("❌")
-                }).catch(function() {
                 })
+                console.log(`Un sondage a été envoyé ! \nContenu du sondage : ${sondage} \nenvoyé par : ${message.author.username}`)
   }
+
+  if(message.content.startsWith(prefix + "slot")) {
+	
+    var replys1 = [
+  ":lemon: : :lemon: : :lemon: ",
+  ":bell: : :bell: : :bell:",
+  ":cherries: : :cherries: : :cherries: ",
+  ":star: : :star: : :star: ",
+  ":gem: : :star: : :seven: ",
+  ":star: : :bell: : :bell:",
+  ":star: : :star: : :dollar:  ",
+  ":gem: : :gem: : :cherries:",
+  ":gem: : :seven: : :seven: ",
+  ":star: : :bell: : :lemon: ",
+  ":large_blue_circle:  : :star: : :large_orange_diamond:  ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":gem: : :gem: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: "
+     ];
+     let reponse = (replys1[Math.floor(Math.random() * replys1.length)])
+     
+        var replys2 = [
+  ":lemon: : :lemon: : :lemon: ",
+  ":x: : :x: : :x:",
+   ":tangerine: : :tangerine: : :tangerine: ",
+  ":large_blue_circle: : :large_blue_circle: : :large_blue_circle: ",
+  ":large_orange_diamond: : :large_orange_diamond: : :large_orange_diamond: ",
+  ":bell: : :bell: : :bell:",
+  ":cherries: : :cherries: : :cherries: ",
+  ":star: : :star: : :star: ",
+  ":gem: : :star: : :seven: ",
+  ":star: : :bell: : :bell:",
+  ":star: : :star: : :cherries: ",
+  ":gem: : :gem: : :cherries:",
+  ":gem: : :seven: : :seven: ",
+  ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :dollar: ",
+  ":star: : :star: : :seven: ",
+  ":gem: : :gem: : :seven: ",
+  ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :dollar: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":dollar: : :star: : :cherries: ",
+  ":seven: : :seven: : :seven:",
+  ":seven: : :large_orange_diamond: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":dollar: : :x: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :dollar: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :dollar:  ",
+  ":dollar: : :star: : :star: ",
+  ":star: : :dollar:  : :seven: "
+     ];
+     let reponse2 = (replys2[Math.floor(Math.random() * replys2.length)])
+            var replys3 = [
+  ":lemon: : :lemon: : :lemon: ",
+  ":bell: : :bell: : :bell:",
+  ":cherries: : :cherries: : :cherries: ",
+  ":star: : :star: : :star: ",
+  ":gem: : :star: : :seven: ",
+  ":star: : :bell: : :bell:",
+  ":star: : :star: : :cherries: ",
+  ":gem: : :gem: : :cherries:",
+  ":gem: : :seven: : :seven: ",
+  ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":gem: : :gem: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: ",
+   ":star: : :bell: : :lemon: ",
+  ":star: : :star: : :cherries: ",
+  ":seven: : :star: : :star: ",
+  ":star: : :star: : :seven: "
+     ];
+     let reponse3 = (replys3[Math.floor(Math.random() * replys3.length)])
+   
+     const embed = new Discord.RichEmbed()
+     .setColor("#FE0101")
+     .setTitle(`**[ :slot_machine: ${message.author.username} a lancé la machine à sous! :slot_machine: ]**`)
+     .addField("**-------------------**", "** **")
+     .addField(`${reponse} \n \n${reponse2}**<-** \n \n${reponse3}`, `** **`)
+     .addField("**-------------------**", "** **")
+     .setDescription("** **")
+     message.channel.send(embed)
+     console.log("J'ai lancé la machine à sous!")
+   }  
+
 })
