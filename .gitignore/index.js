@@ -985,7 +985,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 console.log("La commande pfc a été demandée")
               }
 
-              if(message.content === prefix + "ping"){
+              if(message.content === prefix + "pinHg"){
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
               var API = (client.ping).toFixed(2)
@@ -1004,6 +1004,22 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               
               }
 
+	if(message.content === prefix + "ping") {
+		var start = Date.now(); message.channel.send( 'Pong ! ').then(message => { 
+			var diff = (Date.now() - start); 
+			var API = (bot.ping).toFixed(2) 
+			var embed = new Discord.RichEmbed() 
+			.setTitle(`🏓 Pong!`) 
+			.setColor('RANDOM') 
+			.addField("↔️ Ping / Latence:", `${diff}ms`, true)
+			.addField("🛰 API", `${API}ms`, true)
+			message.edit(embed); 
+				message.edit(embed); 
+			message.edit(embed); 
+				message.edit(embed);
+			console.log("Le ping a été demandé") });}
+
+	
               if (message.content.startsWith(prefix + "roll")) {
                 let args = message.content.split(" ").slice(1);
               
