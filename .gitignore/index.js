@@ -512,7 +512,7 @@ client.on('message', message => {
             return message.channel.send("L'utilisateur est introuvable ou inexistant ! :thumbsdown:");
         }
 
-        if(!message.guild.member(bot.user).hasPermission("MUTE_MEMBERS")) return message.channel.send("Je n'ai pas la permission pour executer la commande ! :thumbsdown:");
+        if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.channel.send("Je n'ai pas la permission pour executer la commande ! :thumbsdown:");
         message.channel.overwritePermissions(mute, { SEND_MESSAGES: false}).then(member => {
             message.channel.send(`${mute.user.username} est désormais mute ! 🔇 :thumbsup:`);
             console.log("Un utilisateur a été mute !  :thumbsup:")
@@ -535,7 +535,7 @@ client.on('message', message => {
             return message.channel.send("L'utilisateur est introuvable ou inexistant ! :thumbsdown:");
         }
 
-        if(!message.guild.member(bot.user).hasPermission("MUTE_MEMBERS")) return message.channel.send("Je n'ai pas la permission pour executer la commande ! :thumbsdown:");
+        if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return message.channel.send("Je n'ai pas la permission pour executer la commande ! :thumbsdown:");
         message.channel.overwritePermissions(mute, { SEND_MESSAGES: true}).then(member => {
             message.channel.send(`${mute.user.username} est désormais démute ! 🔊 :thumbsup:`);
             console.log("Un utilisateur a été mute !")
