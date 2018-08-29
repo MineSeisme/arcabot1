@@ -578,7 +578,7 @@ client.on('message', message => {
           if(!args[0]) return message.channel.send(":no_entry: Indique un nombre de messages à supprimer ! :no_entry:")
           message.channel.bulkDelete(args[0]).then(() => {
           message.channel.send(`${args[0]} messages ont été supprimé(s) ! :thumbsup:`).then(message =>
-                bot.setTimeout(function() {
+                client.setTimeout(function() {
                   message.delete();
                 }, 2000)
               );
