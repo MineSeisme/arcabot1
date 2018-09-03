@@ -603,7 +603,7 @@ client.on('message', message => {
         return message.channel.send("L'utilisateur est introuvable ou inexistant ! :thumbsdown:")
     }
 
-    if(!message.guild.member(bot.user).hasPermission("KICK_MEMBERS")) {
+    if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) {
         return message.channel.send("Je n'ai pas la permission pour exécuter la commande ! :thumbsdown:");
     }
 
