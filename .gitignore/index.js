@@ -130,7 +130,7 @@ client.on('message', message => {
             if (message.content === prefix + "m serv"){
               var serv_embed = new Discord.RichEmbed()
               .setColor('#0301FF')
-              .setTitle("**Mes commandes en rappor avec Arcadia :**")
+              .setTitle("**Mes commandes en rapport avec Arcadia :**")
               .addField("-candid [Votre candidature] :", "Cette commande vous permet d'envoyer votre candidature pour tout et n'importequoi ! (modérateur, animateur, etc...)")
               .addField("-report [Pseudo du joueur] [Raison du report] :", "Permet de report un utilisateur .")
               message.channel.sendEmbed(serv_embed)
