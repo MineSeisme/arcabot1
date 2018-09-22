@@ -76,6 +76,7 @@ client.on('message', message => {
                 .addField("Commandes d'infos : 💡", "-m info")
                 .addField("Commandes fun : 🎉", "-m fun")
                 .addField("Commandes de modération : ⚖️", "-m modo")
+                .addField("Commandes pour Arcadia : ✅", "-m serv")
                 .addField("Commandes d'aide : ❤️", "-m dev")
                 .addField("Autres commandes : 💎", "-m other")
                 .addField("** **", "** **")
@@ -124,6 +125,16 @@ client.on('message', message => {
                 .addField("-sondage :", "Envoie votre sondage dans le channel #❓sondages .")
                 message.channel.sendEmbed(modo_embed);
                 console.log("Les commandes de Modération ont été demandées !");
+            }
+
+            if (message.content === prefix + "m serv"){
+              var serv_embed = new Discord.RichEmbed()
+              .setColor('#0301FF')
+              .setTitle("**Mes commandes en rappor avec Arcadia :**")
+              .addField("-candid [Votre candidature] :", "Cette commande vous permet d'envoyer votre candidature pour tout et n'importequoi ! (modérateur, animateur, etc...)")
+              .addField("-report [Pseudo du joueur] [Raison du report] :", "Permet de report un utilisateur .")
+              message.channel.sendEmbed(serv_embed)
+              console.log("Les commandes en rapport avec Arcadia ont été demandées")
             }
 
             if (message.content === prefix + "m dev"){
@@ -626,7 +637,7 @@ if(message.content.startsWith(prefix + "ban")) {
         return message.channel.send("L'utilisateur est introuvable ou inexistant ! :thumbsdown:");
     }
     
-    if (!message.guild.member(bot.user).hasPermission("BAN_MEMBERS")) {
+    if (!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) {
         return message.channel.send("Je n'ai pas la permission pour exécuter la commande ! :thumbsdown:")
     }
     ban.ban().then(member => {
@@ -985,7 +996,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 console.log("La commande pfc a été demandée")
               }
 
-              if(message.content === prefix + "pinHg"){
+              if(message.content === prefix + "ping") {
                 var start = Date.now(); message.channel.send(message.channel.id, 'Pong! ').then(message => { 
               var diff = (Date.now() - start); 
               var API = (client.ping).toFixed(2)
@@ -1004,22 +1015,6 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
               
               }
 
-	if(message.content === prefix + "ping") {
-		var start = Date.now(); message.channel.send( 'Pong ! ').then(message => { 
-			var diff = (Date.now() - start); 
-			var API = (client.ping).toFixed(2) 
-			var embed = new Discord.RichEmbed() 
-			.setTitle(`🏓 Pong!`) 
-			.setColor('RANDOM') 
-			.addField("↔️ Ping / Latence:", `${diff}ms`, true)
-			.addField("🛰 API", `${API}ms`, true)
-			message.edit(embed); 
-				message.edit(embed); 
-			message.edit(embed); 
-				message.edit(embed);
-			console.log("Le ping a été demandé") });}
-
-	
               if (message.content.startsWith(prefix + "roll")) {
                 let args = message.content.split(" ").slice(1);
               
@@ -1056,6 +1051,21 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                   }
                 }
           
+                if (message.content.startsWith(prefix + "candid")){
+                  let args = message.content.split(" ").slice(1);
+                var cnd = args.slice(0).join(" ")
+                if(!cnd) return message.channel.send("⚠️ Veuillez utiliser une candidature correcte ! ⚠️")
+
+                var embed = new Discord.RichEmbed()
+                .setColor('RANDOM')
+                .setTitle("⚠️ Une candidature nous a été envoyée ! ⚠️")
+                .setDescription(`Description de la candidature : ${cnd}`)
+                .setFooter(`Envoyée par ${message.author.username}`)
+
+                client.guilds.get("465822087219511297").channels.get("493164714998628352").send(embed)
+                message.channel.send("Votre candidature à été envoyé à l'équipe d'Arcadia ! :thumbsup: \nVous receverez une réponse en MP d'ici peu ! :wink:")
+                }
+
                 if (message.content.startsWith(prefix + "sendbug")){
                   let args = message.content.split(" ").slice(1);
                 var err = args.slice(0).join(" ")
@@ -1070,7 +1080,35 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 client.guilds.get("465822087219511297").channels.get("479591468869091328").send(embed)
                 message.channel.send("Le problème à été envoyé à l'équipe d'Arcadia ! :thumbsup:")
                 }
-	
+
+                if (message.content.startsWith(prefix + "report")){
+                  let ReportedUser = message.guild.member(
+                    message.mentions.users.first() || message.guild.members.get(args[0])
+                  );
+
+                  if (!ReportedUser) {
+                    return message.channel.send("L'utilisateur n'existe pas !");
+                  }
+                  let ReportedReason = args.join(" ").slice(30);
+
+                  let reportEmbed = new Discord.RichEmbed()
+                  .setDescription(`Reports`)
+                  .setColor('#FF0108')
+                  .addField(
+                    'Utilisateur reporté :',
+                    `${ReportedUser} (ID : ${ReportedUser.id})`
+                  )
+                  .addField(
+                    'Utilisateur qui a report :',
+                    `${message.author} (ID : ${message.author.id})`
+                  )
+                  .addField('Raison', ReportedReason);
+
+                client.guilds.get("465822087219511297").channels.get("493171186511904768").send(reportEmbed)
+                message.channel.send("Votre report à été envoyé à l'équipe d'Arcadia ! :thumbsup:")
+                message.delete();
+                }
+
                 if (message.content.startsWith(prefix + "idée")){
                   let args = message.content.split(" ").slice(1);
                 var idé = args.slice(0).join(" ")
@@ -1085,6 +1123,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
                 client.guilds.get("465822087219511297").channels.get("481109899879645204").send(embed)
                 message.channel.send("Votre idée a été envoyé à l'équipe d'Arcadia ! :thumbsup:")
                 }
+
 
                 if(message.content.startsWith(prefix + "sondage")) {
                   let args = message.content.split(" ").slice(1);
@@ -1226,11 +1265,12 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
    
      const embed = new Discord.RichEmbed()
      .setColor("#FE0101")
-     .setTitle(`**[ :slot_machine: ${message.author.username} a lancé la machine à sous ! :slot_machine: ]**`)
+     .setTitle(`**C'est parti pour un tour !**`)
      .addField("**-------------------**", "** **")
      .addField(`${reponse} \n \n${reponse2}**<-** \n \n${reponse3}`, `** **`)
      .addField("**-------------------**", "** **")
      .setDescription("** **")
+     .setFooter(`Lancé par ${message.author.username}`)
      message.channel.send(embed)
      console.log("J'ai lancé la machine à sous!")
    }  
