@@ -576,7 +576,7 @@ client.on('message', message => {
                 .addField("Tag : :hash:", `#${client.user.discriminator}`)
                 .addField("ID : :id:", `${client.user.id}`)
                 .addField("Date de création : :clock3:", client.user.createdAt)
-                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.4")
+                .addField("Version : :arrows_counterclockwise: ", "ArcaBot est en version 2.7")
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
         }
