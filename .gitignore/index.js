@@ -567,8 +567,10 @@ client.on('message', message => {
         }
 
         if (message.content === prefix + "card"){
+          let bicon = client.user.displayAvatarURL;
             var card_embed = new Discord.RichEmbed()
                 .setColor("#0031F7")
+                .setThumbnail(bicon)
                 .setTitle("Ma carte d'identitée :")
                 .addField("Nom :", "**ArcaBot**")
                 .addField("Tag : :hash:", `#${client.user.discriminator}`)
@@ -578,7 +580,6 @@ client.on('message', message => {
                 message.channel.sendEmbed(card_embed)
                 console.log("La Carte d'identitée a été demandée !")
         }
-
 
         if(message.content.startsWith(prefix + "clear")) {
           if (message.channel.type === "dm") return;
